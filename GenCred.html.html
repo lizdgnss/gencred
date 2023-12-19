@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credencial Virtual</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0e417b;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .campo {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #696b74;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Credencial styles */
+
+    #credencial {
+      display: none;
+      max-width: 300px;
+      margin: 20px auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    .foto {
+      width: 100%;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .datos {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Formulario para recopilar datos -->
+  <form id="formulario">
+
+    <div class="campo">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" required>
+    </div>
+
+    <div class="campo">
+      <label for="expediente">Expediente:</label>
+      <input type="number" id="expediente" required>
+    </div>
+
+    <div class="campo">
+      <label for="inicio">Inicio:</label>
+      <input type="date" id="inicio" required>
+    </div>
+
+    <div class="campo">
+      <label for="termino">Término:</label>
+      <input type="date" id="termino" required>
+
+        
+    </div>
+
+    <div class="campo">
+      <label for="prestacion">Prestación:</label>
+      <select id="prestacion" required>
+      <option value="Servicio Social">Servicio Social</option>
+        <option value="Prácticas Profesionales">Prácticas Profesionales</option>
+        <option value="1° Práctica de Ejecución">1° Práctica de Ejecución</option>
+        <option value="2° Práctica de Ejecución">2° Práctica de Ejecución</option>
+        <option value="1° Práctica de Ejecución de Competencias ">1° Práctica de Ejecución de Competencias</option>
+        <option value="3° Práctica de Ejecución de Competencias ">3° Práctica de Ejecución de Competencias</option>
+        <option value="Actividades Prácticas ">Actividades Prácticas</option>
+        <option value="Competencias Laborales">Competencias Laborales</option>
+        <option value="Competencias Profesionales">Competencias Profesionales</option>
+        <option value="Estadía">Estadía</option>
+        <option value="Estadías Profesionales">Estadías Profesionales</option>
+        <option value="Estadía Empresarial">Estadía Empresarial</option>
+        <option value="Prácticas de Ejecución">Prácticas de Ejecución</option>
+        <option value="Prácticas de Ejecución de Competencia">Prácticas de Ejecución de Competencia</option>
+        <option value="Prácticas de Especialización">Prácticas de Especialización</option>
+        <option value="Prácticas de Experiencia Profesional">Prácticas de Experiencia Profesional</option>
+        <option value="Proyecto de Intervención">Proyecto de Intervención</option>
+         <option value="Proyecto Terminal">Proyecto Terminal</option>
+        <option value="Proyecto Terminal I">Proyecto Terminal I</option>
+         <option value="Proyecto Terminal I y II">Proyecto Terminal I y II</option>
+         <option value="Proyectos Educativos o de Vinculación">Proyectos Educativos o de Vinculación</option>
+         <option value="Residencia Profesional">Residencial Profesional</option>
+        
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="asignacion">Área de asignación:</label>
+      <select id="asignacion" required>
+        <option value="Presidencia Municipal">Presidencia Municipal</option>
+        <option value="Secretaria del Ayuntamiento">Secretaría del Ayuntamiento</option>
+        <option value="Tesorería Municipal">Tesorería Municipal</option>
+        <option value="Contraloría Interna Municipal">Contraloría Interna Municipal</option>
+         <option value="Dirección General Jurídica y Consultiva">Dirección General Jurídica y Consultiva</option>
+         <option value="Dirección General de Administración">Dirección General de Administración</option>
+         <option value="Dirección General de Obras Públicas">Dirección General de Obras Públicas</option>
+         <option value="Dirección General de Servicios Públicos">Dirección General de Servicios Públicos</option>
+         <option value="Dirección General de Desarrollo Urbano">Dirección General de Desarrollo Urbano</option>
+         <option value="Dirección General de Seguridad Ciudadana y Movilidad Segura">Dirección General de Seguridad Ciudadana y Movilidad Segura</option>
+         <option value="Dirección General de Gobierno">Dirección General de Gobierno</option>
+         <option value="Dirección General de Medio Ambiente">Dirección General de Medio Ambiente</option>
+         <option value="Dirección General de Desarrollo y Fomento Económico">Dirección General de Desarrollo y Fomento Económico</option>
+         <option value="Coordinación Municipal de Protección Civil y Bomberos">Coordinación Municipal de Protección Civil y Bomberos</option>
+         <option value="Dirección General de Desarrollo Social">Dirección General de Desarrollo Social</option>
+         <option value="Instituto de las Mujeres Naucalpenses y la Igualdad Sustantiva">Instituto de las Mujeres Naucalpenses y la Igualdad Sustantiva</option>
+         <option value="Dirección General de Cultura y Educación">Dirección General de Cultura y Educación</option>
+         <option value="Dirección General del Instituto Municipal de Cultura Física y Deporte de Naucalpan (IMCUFIDEN) ">Dirección General del Instituto Municipal de       Cultura Física y    Deporte de Naucalpan (IMCUFIDEN) </option>
+          <option value="Art.19 y 21">Art.19 y 21</option>
+         <option value="Cabildo">Cabildo</option>
+         <option value="Presidencia">Presidencia</option>
+         <option value="Otro">Otro</option>
+         <option value="TD">TD</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="depto">Departamento:</label>
+      <select id="depto" required>
+        <option value="Coordinación Administrativa">Coordinación Administrativa</option>
+           <option value="Coordinación Administrativa y Técnica">Coordinación Administrativa y Técnica</option>
+           <option value="Coordinación de Control, Gestión, Seguimiento y Enlace Jurídico">Coordinación de Control, Gestión, Seguimiento y Enlace Jurídico</option>
+           <option value="Coordinación de Disposición Final de Residuos Sólidos Urbanos">Coordinación de Disposición Final de Residuos Sólidos Urbanos</option>
+           <option value="Coordinación de Sistemas">Coordinación de Sistemas</option>
+           <option value="Coordinación del Parque Naucalli">Coordinación del Parque Naucalli</option>
+           <option value="Coordinación General de Unidades Administrativas">Coordinación General de Unidades Administrativas</option>
+           <option value="Coordinación Jurídica">Coordinación Jurídica</option>
+           <option value="Cuarta Regiduría">Cuarta Regiduría</option>
+           <option value="Décima Primera Regiduría">Décima Primera Regiduría</option>
+           <option value="Décima Regiduría">Décima Regiduría</option>
+           <option value="Delegación Administrativa San Mateo">Delegación Administrativa San Mateo</option>
+           <option value="Departamento de Acceso Igualitario al Desarrollo">Departamento de Acceso Igualitario al Desarrollo</option>
+           <option value="Departamento de Anuncios y Obras en Via Pública">Departamento de Anuncios y Obras en Via Pública</option>
+           <option value="Departamento de Archivo y  Documentación">Departamento de Archivo y  Documentación</option>
+           <option value="Departamento de Arquitectura y Urbanismo">Departamento de Arquitectura y Urbanismo</option>
+            <option value="Departamento de Asesoría Psicológica y de Espacios y Mecanismos de Refugio">Departamento de Asesoría Psicológica y de Espacios y Mecanismos de Refugio</option>
+           <option value="Departamento de Asesoría y Capacitación">Departamento de Asesoría y Capacitación</option>
+           <option value="Departamento de Asistencia Jurídica y Penal">Departamento de Asistencia Jurídica y Penal</option>
+           <option value="Departamento de Atención a Grupos Sociales y Enlaces Institucionales">Departamento de Atención a Grupos Sociales y Enlaces Institucionales</option>
+           <option value="Departamento de Atención a la Violencia de Género y Acceso a la Justicia">Departamento de Atención a la Violencia de Género y Acceso a la Justicia</option>
+           <option value="Departamento de Bibliotecas">Departamento de Bibliotecas</option>
+           <option value="Departamento de Bienes Inmuebles">Departamento de Bienes Inmuebles</option>
+           <option value="Departamento de Bienes Muebles">Departamento de Bienes Muebles</option>
+           <option value="Departamento de Capacitación">Departamento de Capacitación</option>
+           <option value="Departamento de Certificaciones, Constancias y Notificaciones">Departamento de Certificaciones, Constancias y Notificaciones</option>
+           <option value="Departamento de Concursos y Contratos">Departamento de Concursos y Contratos</option>
+           <option value="Departamento de Conservación de Vialidades y Proyectos">Departamento de Conservación de Vialidades y Proyectos</option>
+           <option value="Departamento de Contabilidad">Departamento de Contabilidad</option>
+           <option value="Departamento de Control Vehícular">Departamento de Control Vehícular</option>
+           <option value="Departamento de Coordinación y Enlace Interinstitucional">Departamento de Coordinación y Enlace Interinstitucional</option>
+           <option value="Departamento de Cuenta Pública">Departamento de Cuenta Pública</option>
+           <option value="Departamento de Derecho Administrativo y Fiscal">Departamento de Derecho Administrativo y Fiscal</option>
+           <option value="Departamento de Derecho Civil,Mercantil  y Agrario">Departamento de Derecho Civil,Mercantil  y Agrario</option>
+           <option value="Departamento de Derecho Laboral">Departamento de Derecho Laboral</option>
+           <option value="Departamento de Derecho Penal y Amparo">Departamento de Derecho Penal y Amparo</option>
+           <option value="Departamento de Empoderamiento de la Mujer">Departamento de Empoderamiento de la Mujer</option>
+           <option value="Departamento de Enlace Jurídico">Departamento de Enlace Jurídico</option>
+           <option value="Departamento de Estadística,Geoforenciación, Recolección y Análisis Contextual">Departamento de Estadística,Geoforenciación, Recolección y Análisis Contextual</option>
+           <option value="Departamento de Estimaciones">Departamento de Estimaciones</option> 
+           <option value="Departamento de Evaluación de Proyectos">Departamento de Evaluación de Proyectos</option>
+           <option value="Departamento de Evaluación del Plan de Desarrollo Municipal">Departamento de Evaluación del Plan de Desarrollo Municipal</option>
+           <option value="Departamento de Geoestadística y Tecnologías de la Información">Departamento de Geoestadística y Tecnologías de la Información</option>
+           <option value="Departamento de Gestión Educativa">Departamento de Gestión Educativa</option>
+           <option value="Departamento de Ingeniería y Estudios Complementarios">Departamento de Ingeniería y Estudios Complementarios</option>
+           <option value="Departamento de Inspección, Verificación y Regularización Ambiental">Departamento de Inspección, Verificación y Regularización Ambiental</option>
+           <option value="Departamento de Investigación y Atención a Quejas y Denuncias">Departamento de Investigación y Atención a Quejas y Denuncias</option>
+           <option value="Departamento de Juicios de Amparo y Atención a los Derechos Humanos">Departamento de Juicios de Amparo y Atención a los Derechos Humanos</option>
+           <option value="Departamento de Licencias de Construcción">Departamento de Licencias de Construcción</option>
+           <option value="Departamento de Manejo y Permiso de Arbolado Urbano y Áreas Verdes Urbanas">Departamento de Manejo y Permiso de Arbolado Urbano y Áreas Verdes Urbanas</option>
+           <option value="Departamento de Mantenimiento General">Departamento de Mantenimiento General</option>
+           <option value="Departamento de Microcréditos San Bartolo">Departamento de Microcréditos San Bartolo</option>
+           <option value="Departamento de Nóminas">Departamento de Nóminas</option>
+           <option value="Departamento de Obras por Administración">Departamento de Obras por Administración</option>
+           <option value="Departamento de Ordenamiento Urbano y Señalamiento Vial">Departamento de Ordenamiento Urbano y Señalamiento Vial</option>
+           <option value="Departamento de Panteones y Crematorios">Departamento de Panteones y Crematorios</option>
+           <option value="Departamento de Personal ,Recursos Humanos, Financieros y Materiales">Departamento de Personal ,Recursos Humanos, Financieros y Materiales</option>
+           <option value="Departamento de Planeación Urbana">Departamento de Planeación Urbana</option>
+           <option value="Departamento de Planeación, Desarrollo y Bienestar">Departamento de Planeación, Desarrollo y Bienestar</option>
+           <option value="Departamento de Planes y Programas">Departamento de Planes y Programas</option>
+           <option value="Departamento de Políticas Públicas de Género y Vinculación Interinstitucional">Departamento de Políticas Públicas de Género y Vinculación Interinstitucional</option>
+           <option value="Departamento de Portal Digital">Departamento de Portal Digital</option>
+           <option value="Departamento de Presupuesto">Departamento de Presupuesto</option>
+           <option value="Departamento de Prevención de la Violencia">Departamento de Prevención de la Violencia</option>
+           <option value="Departamento de Prevención y Mitigación de Riesgos">Departamento de Prevención y Mitigación de Riesgos</option>
+           <option value="Departamento de Procedimientos">Departamento de Procedimientos</option>
+           <option value="Departamento de Profesionalización y Derechos de la Mujer
+">Departamento de Profesionalización y Derechos de la Mujer</option>
+           <option value="Departamento de Programas de Apoyo">Departamento de Programas de Apoyo</option>
+           <option value="Departamento de Promoción para el Desarrollo Social">Departamento de Promoción para el Desarrollo Social</option>
+          <option value="Departamento de Proyectos Productivos">Departamento de Proyectos Productivos</option>
+           <option value="Departamento de Proyectos, Movilidad y Transporte">Departamento de Proyectos, Movilidad y Transporte</option>
+           <option value="Departamento de Reclutamiento, Capacitación y Desarrollo de Personal">Departamento de Reclutamiento, Capacitación y Desarrollo de Personal</option>
+           <option value="Departamento de Recursos Humanos">Departamento de Recursos Humanos</option>
+           <option value="Departamento de Regularización y Dictámenes Técnicos">Departamento de Regularización y Dictámenes Técnicos</option>
+           <option value="Departamento de Relaciones Laborales">Departamento de Relaciones Laborales</option>
+           <option value="Departamento de Seguimiento de Programas de Prevención">Departamento de Seguimiento de Programas de Prevención</option>
+           <option value="Departamento de Sistemas">Departamento de Sistemas</option>
+           <option value="Departamento de Soporte Técnico">Departamento de Soporte Técnico</option>
+           <option value="Departamento de Supervisión de Obra por Contrato">Departamento de Supervisión de Obra por Contrato</option>
+           <option value="Departamento de Uso y Control de Suelo">Departamento de Uso y Control de Suelo</option>
+           <option value="Departamento de Ventanilla de Atención Ciudadana ">Departamento de Ventanilla de Atención Ciudadana </option>
+           <option value="Departamento de Ventanilla Única">Departamento de Ventanilla Única</option> 
+           <option value="Departamento de Vinculación y Eventos">Departamento de Vinculación y Eventos</option>
+           <option value="Departamento Substanciador de Procedimientos Administrativos">Departamento Substanciador de Procedimientos Administrativos</option>
+           <option value="Departamento Substanciador de Procedimientos Patrimoniales">Departamento Substanciador de Procedimientos Patrimoniales</option>
+           <option value="Dirección General de Cultura y Educación">Dirección General de Cultura y Educación</option>
+           <option value="Dirección General de Desarrollo Social">Dirección General de Desarrollo Social</option>
+            <option value="Dirección General de Desarrollo Urbano">Dirección General de Desarrollo Urbano</option>
+           <option value="Dirección General de Desarrollo y Fomento Económico">Dirección General de Desarrollo y Fomento Económico</option>
+           <option value="Dirección General Jurídica y Consultiva">Dirección General Jurídica y Consultiva</option>
+           <option value="Informática de Tesorería">Informática de Tesorería</option>
+           <option value="Junta Municipal de Reclutamiento">Junta Municipal de Reclutamiento</option>
+           <option value="Novena Regiduría">Novena Regiduría</option>
+           <option value="Octava Regiduría">Octava Regiduría</option>
+           <option value="Oficialía del Registro Civil No.1">Oficialía del Registro Civil No.1</option>
+           <option value="Oficialía del Registro Civil No.3">Oficialía del Registro Civil No.3</option>
+           <option value="Presidencia de la Comisión de Honor y Justicia">Presidencia de la Comisión de Honor y Justicia</option>
+           <option value="Primera Regiduría">Primera Regiduría</option>
+           <option value="Primera Sindicatura">Primera Sindicatura</option>
+           <option value="Secretaria Técnica">Secretaria Técnica</option>
+           <option value="Segunda Regiduría">Segunda Regiduría</option>
+           <option value="Segunda Sindicatura">Segunda Sindicatura</option>
+           <option value="Séptima Regiduría">Séptima Regiduría</option>
+           <option value="Sexta Regiduría">Sexta Regiduría</option>
+           <option value="Subcontraloría de Auditoría">Subcontraloría de Auditoría</option>
+           <option value="Subcontraloría de Evaluación e Investigación">Subcontraloría de Evaluación e Investigación</option>
+           <option value="Subcontraloría de Responsabilidades">Subcontraloría de Responsabilidades</option>
+           <option value="Subdirección Administrativa">Subdirección Administrativa</option>
+           <option value="Subdirección Contenciosa">Subdirección Contenciosa</option>
+           <option value="Subdirección de Atención y Gestión Ciudadana">Subdirección de Atención y Gestión Ciudadana</option>
+           <option value="Subdirección de Autoridades Auxiliares y Copacis">Subdirección de Autoridades Auxiliares y Copacis</option>
+           <option value="Subdirección de Bomberos">Subdirección de Bomberos</option>
+           <option value="Subdirección de Comunicación Digital">Subdirección de Comunicación Digital</option>
+           <option value="Subdirección de Concertación Comercial">Subdirección de Concertación Comercial</option>
+           <option value="Subdirección de Construcción">Subdirección de Construcción</option>
+           <option value="Subdirección de Contabilidad General">Subdirección de Contabilidad General</option>
+           <option value="Subdirección de Coordinación de Gestión de Control">Subdirección de Coordinación de Gestión de Control</option>
+           <option value="Subdirección de Cultura ">Subdirección de Cultura </option>
+           <option value="Subdirección de Desarrollo Policial">Subdirección de Desarrollo Policial</option>
+           <option value="Subdirección de Educación">Subdirección de Educación</option>
+           <option value="Subdirección de Fomento Económico">Subdirección de Fomento Económico</option>
+           <option value="Subdirección de Gobierno Digital">Subdirección de Gobierno Digital</option>
+           <option value="Subdirección de Igualdad Sustantiva y Perspectiva de Género">Subdirección de Igualdad Sustantiva y Perspectiva de Género</option>
+           <option value="Subdirección de Inteligencia e Investigación Criminal">Subdirección de Inteligencia e Investigación Criminal</option>
+           <option value="Subdirección de la Juventud Naucalpense">Subdirección de la Juventud Naucalpense</option>
+           <option value="Subdirección de Mensaje Institucional">Subdirección de Mensaje Institucional</option>
+           <option value="Subdirección de Movilidad Territorial">Subdirección de Movilidad Territorial</option>
+           <option value="Subdirección de Normatividad Comercial">Subdirección de Normatividad Comercial</option>
+           <option value=""></option>
+           <option value=""></option>
+           <option value=""></option>
+           <option value=""></option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="foto">Foto:</label>
+      <input type="file" id="foto" accept="image/*">
+    </div>
+
+    <button type="button" onclick="mostrarCredencial()">Generar Credencial</button>
+  </form>
+
+  <!-- Credencial -->
+   <div id="credencial" class="credencial">
+    <img id="mostrarFoto" src="" alt="Foto" class="foto">
+    <div class="datos">
+      <div class="campo">
+        <label for="mostrarNombre">Nombre:</label>
+        <span id="mostrarNombre"></span>
+      </div>
+      <div class="campo">
+        <label for="mostrarExpediente">Expediente:</label>
+        <span id="mostrarExpediente"></span>
+      </div>
+      <div class="campo">
+        <label for="mostrarInicio">Inicio:</label>
+        <span id="mostrarInicio"></span>
+      </div>
+     <div class="campo">
+        <label for="mostrarTermino">Término:</label>
+        <span id="mostrarTermino"></span>
+      </div>
+      <div class="campo">
+        <label for="mostrarPrestacion">Prestación:</label>
+        <span id="mostrarPrestacion"></span>
+      </div>
+      <div class="campo">
+        <label for="mostrar">Área de asignación:</label>
+        <span id="mostrarAreadeAsignacion"></span>
+      </div>
+      <div class="campo">
+        <label for="mostrar">Departamento:</label>
+        <span id="mostrarDepartamento"></span>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Referencia a html2canvas desde CDN -->
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  
+  <script>
+    function mostrarCredencial() {
+      // Obtener valores del formulario
+      var nombre = document.getElementById("nombre").value;
+      var expediente = document.getElementById("expediente").value;
+      var inicio = document.getElementById("inicio").value;
+       var termino = document.getElementById("termino").value;
+      var prestacion = document.getElementById("prestacion").value;
+      var prestacion = document.getElementById("prestacion"),
+      prestacion = prestacion.value;
+      var asignacion = document.getElementById("asignacion").value;
+      var asignacion = document.getElementById("asignacion"),
+      asignacion = asignacion.value;
+      var depto = document.getElementById("depto").value;
+      var depto = document.getElementById("depto"),
+      depto = depto.value;
+      var fotoInput = document.getElementById("foto");
+      var fotoURL = '';
+
+      // Verificar si se cargó una foto
+      if (fotoInput.files.length > 0) {
+        var fotoFile = fotoInput.files[0];
+        fotoURL = URL.createObjectURL(fotoFile);
+      }
+
+      // Mostrar valores en la credencial
+      document.getElementById("mostrarNombre").innerText = nombre;
+      document.getElementById("mostrarExpediente").innerText = expediente;
+      document.getElementById("mostrarInicio").innerText = inicio;
+      document.getElementById("mostrarTermino").innerText = termino;
+      document.getElementById("mostrarPrestacion").innerText = prestacion;
+      document.getElementById("mostrarAreadeAsignacion").innerText =asignacion;
+       document.getElementById("mostrarDepartamento").innerText =depto;
+      document.getElementById("mostrarFoto").src = fotoURL;
+
+      // Mostrar la credencial y ocultar el formulario
+      document.getElementById("formulario").style.display = "none";
+      document.getElementById("credencial").style.display = "block";
+
+      // Generar la imagen de la credencial y habilitar la descarga
+      html2canvas(document.getElementById("credencial")).then(function(canvas) {
+        var link = document.createElement("a");
+        link.href = canvas.toDataURL("image/jpeg");
+
+        link.download = "exp.jpg";
+        link.click();
+      });
+    }
+  </script>
+
+</body>
+</html>
