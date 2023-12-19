@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Códigos QR</title>
+  <script src="https://cdn.rawgit.com/electron/electron/gh-pages/docs/api/clipboard/renderer.js"></script>
+  <script src="https://rawgit.com/electron/electron/gh-pages/docs/api/clipboard/renderer.js"></script>
+  <script src="https://cdn.rawgit.com/electron/electron/gh-pages/docs/api/shell/renderer.js"></script>
+  <script src="https://rawgit.com/electron/electron/gh-pages/docs/api/shell/renderer.js"></script>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+  <style>
+    body {
+      background-color: #0e417b; /**/
+      color: white;
+      font-family: 'Century Gothic', cursive, sans-serif; /* */
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    label, textarea {
+      margin: 10px;
+    }
+    textarea {
+      width: 80%;
+      padding: 10px;
+    }
+    button {
+      padding: 10px;
+      font-family: 'Century Gothic', cursive, sans-serif; /* */
+      background-color: #7f8c8d; /* Color gris */
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .codigoQRContainer {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Generador de Códigos QR</h1>
+
+  <label for="urlsInput">Ingresa las URLs (separadas por coma):</label>
+  <textarea id="urlsInput" placeholder="https://ejemplo1.com, https://ejemplo2.com"></textarea>
+
+  <button onclick="generarCodigosQR()">Generar Códigos QR</button>
+
+  <div id="codigosQR"></div>
+
+  <script>
+    function generarCodigosQR() {
+      var urlsInput = document.getElementById('urlsInput').value;
+      var urls = urlsInput.split(',');
+
+      var codigosQRContainer = document.getElementById('codigosQR');
+      codigosQRContainer.innerHTML = ''; // Limpiar el contenedor
+
+      urls.forEach(function(url) {
+        var codigoQRDiv = document.createElement('div');
+        codigoQRDiv.className = 'codigoQRContainer';
+        codigosQRContainer.appendChild(codigoQRDiv);
+
+        var codigoQR = new QRCode(codigoQRDiv, {
+          text: url.trim(),
+          width: 300,
+          height: 300
+        });
+
+        descargarCodigoQR(codigoQRDiv); // Llama a la función de descarga directamente
+      });
+    }
+
+    function descargarCodigoQR(codigoQRDiv) {
+      var descargarBtn = document.createElement('button');
+      descargarBtn.textContent = 'Descargar Código QR';
+      descargarBtn.onclick = function() {
+        codigoQRDiv.removeChild(descargarBtn); // Elimina el botón antes de la descarga
+        html2canvas(codigoQRDiv, { backgroundColor: 'transparent' }).then(function(canvas) {
+          var link = document.createElement("a");
+          document.body.appendChild(link);
+          link.href = canvas.toDataURL("image/png");
+          link.download = "codigos_qr.png";
+          link.click();
+          document.body.removeChild(link);
+        });
+      };
+
+      codigoQRDiv.appendChild(descargarBtn);
+    }
+  </script>
+</body>
+</html>
